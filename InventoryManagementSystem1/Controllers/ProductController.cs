@@ -149,12 +149,17 @@ namespace InventoryManagementSystem1.Controllers
             _applicationDbContext = applicationDbContext;
             _product = product;
         }
-
-        public IActionResult Index()
+    // public async Task<IActionResult> Index()
+    // {
+    //     var products = await _reader.GetAllProductAsync();
+    //     return View(products);
+    // }
+        public async Task<IActionResult> Index()
         {
             //Service->student Data fatch ->student model
             //var products = ProductRepository.GetAll();
-            var products = _applicationDbContext.Product.ToList();
+            //var products = _applicationDbContext.Product.ToList();
+            var products = await _product.GetAllProductAsync();
             return View(products);
             //return View();
         }
@@ -232,8 +237,9 @@ namespace InventoryManagementSystem1.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
-            _applicationDbContext.Add(product);
-            _applicationDbContext.SaveChanges();
+            //_applicationDbContext.Add(product);
+            //_applicationDbContext.SaveChanges();
+            await _product.AddProductAsync(product);
             return RedirectToAction("Index");
         }
         //[HttpPost]
@@ -263,10 +269,11 @@ namespace InventoryManagementSystem1.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Product product)
         {
-            if(id != product.Id) return NotFound();
-            _applicationDbContext.Update(product);
-            _applicationDbContext.SaveChanges();
-            return RedirectToAction("Index");
+            //if(id != product.Id) return NotFound();
+            //_applicationDbContext.Update(product);
+            //_applicationDbContext.SaveChanges();
+            bool exits = await _product.UpdateProductAsync(product);
+            return exits == true ? RedirectToAction("Index"): NotFound();
         }
         public async Task<IActionResult> Delete(int id)
         {
@@ -278,12 +285,15 @@ namespace InventoryManagementSystem1.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             //var product = await _applicationDbContext.Product.FindAsync(id);
-            var products = await _product.GetProductByIdAsync(id);
-            if (products != null)
-            {
-                _applicationDbContext.Product.Remove(products);
-                _applicationDbContext.SaveChanges();
-            }
+            //var products = await _product.GetProductByIdAsync(id);
+            bool deleted = await _product.DeleteProductByIdAsync(id);
+            if (!deleted) return NotFound();
+          
+            //if (products != null)
+            //{
+            //    _applicationDbContext.Product.Remove(products);
+            //    _applicationDbContext.SaveChanges();
+            //}
             return RedirectToAction("Index");
         }
         public IActionResult Privacy()
