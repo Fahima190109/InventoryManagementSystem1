@@ -43,6 +43,16 @@ namespace InventoryManagementSystem1.Services.Implementation
             return await _context.Product.FindAsync(id);
         }
 
+        public async Task<List<Product>> SearchProductsAsync(string searchText)
+        {
+            IQueryable<Product> query = _context.Product;
+           query = query.Where(p =>
+                    p.Name.Contains(searchText) ||
+                    p.Description.Contains(searchText));
+            
+            return await query.ToListAsync();
+        }
+
         public async Task<bool> UpdateProductAsync(Product product)
         {
             var exists = await _context.Product.Where(p => p.Id == product.Id).AnyAsync();

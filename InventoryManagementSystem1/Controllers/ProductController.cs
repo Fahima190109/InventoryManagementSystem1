@@ -160,8 +160,15 @@ namespace InventoryManagementSystem1.Controllers
             //var products = ProductRepository.GetAll();
             //var products = _applicationDbContext.Product.ToList();
             var products = await _product.GetAllProductAsync();
+           // var products = await _product.SearchProductsAsync(searchText);
             return View(products);
             //return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(string searchText)
+        {
+            var products = await _product.SearchProductsAsync(searchText);
+            return View(products);
         }
         //public IActionResult Details(int id)
         //{
