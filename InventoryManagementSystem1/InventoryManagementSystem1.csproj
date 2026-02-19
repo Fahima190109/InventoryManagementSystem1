@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Services\Implementation\SupplierService.cs~RF177455.TMP" />
     <None Remove="Views\Product\Delete.cshtml~RF3a9e78.TMP" />
     <None Remove="Views\Product\Details.cshtml~RF2cff0b.TMP" />
+    <None Remove="Views\Supplier\Create.cshtml~RF27766a.TMP" />
   </ItemGroup>
 
   <ItemGroup>
