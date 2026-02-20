@@ -9,6 +9,6 @@ namespace InventoryManagementSystem1.Models.Supplier
         public string Name { get; set; }
         public string ContactInfo { get; set; }
         public string Country {  get; set; }
-        public ICollection<Product.Product> Products { get; set; }
+       // public ICollection<Product.Product> Products { get; set; }
     }
 }

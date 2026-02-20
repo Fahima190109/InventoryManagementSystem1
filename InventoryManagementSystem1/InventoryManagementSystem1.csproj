@@ -11,6 +11,8 @@
     <None Remove="Views\Product\Delete.cshtml~RF3a9e78.TMP" />
     <None Remove="Views\Product\Details.cshtml~RF2cff0b.TMP" />
     <None Remove="Views\Supplier\Create.cshtml~RF27766a.TMP" />
+    <None Remove="Views\Supplier\Delete.cshtml~RF5b3185.TMP" />
+    <None Remove="Views\Supplier\Edit.cshtml~RF3d8b20.TMP" />
   </ItemGroup>
 
   <ItemGroup>
